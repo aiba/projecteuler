@@ -1,9 +1,12 @@
 {:paths   ["src"]
- :deps    {cider/cider-nrepl           {:mvn/version "0.25.3"}
+ :deps    {org.clojure/clojure           {:mvn/version "1.10.1"}
+           cider/cider-nrepl           {:mvn/version "0.25.3"}
            refactor-nrepl              {:mvn/version "2.5.0"}
            org.clojure/tools.namespace {:mvn/version "1.0.0"}}
  :aliases
  {:dev
-  {:main-opts  ["-m" "nrepl.cmdline"
+  {:jvm-opts  ["-Xmx8g"
+               "-XX:+UseParallelGC"]
+   :main-opts  ["-m" "nrepl.cmdline"
                 "--middleware"
                 "[cider.nrepl/cider-middleware,refactor-nrepl.middleware/wrap-refactor]"]}}}
