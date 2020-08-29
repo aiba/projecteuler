@@ -10,4 +10,4 @@
       (aset a j -1))
     (filter pos? a)))
 
-;; (apply + (sieve-primes 2e6))
+(apply + (sieve-primes 2e6))
