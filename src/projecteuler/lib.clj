@@ -41,6 +41,7 @@
 
 (comment
   (prime-factors 10)
+  (prime-factors 16)
   (combo/subsets (prime-factors 220))
   )
 
@@ -58,4 +59,25 @@
 (comment
   (divisors 24)
   (proper-divisors 24)
+  )
+
+(defn prime? [n]
+  (loop [[p & ps] all-primes]
+    (cond
+      (= p n) true
+      (> p n) false
+      :else   (recur ps))))
+
+(comment
+  (prime? 3)
+  (prime? 383)
+  (prime? 384)
+  )
+
+(defn prime-factorization [n]
+  (frequencies (prime-factors n)))
+
+(comment
+  (prime-factorization 36)
+  (prime-factorization 32)
   )
