@@ -23,3 +23,10 @@
   )
 
 ;; max 6 digits
+
+(comment
+  (apply +
+         (for [n (range 2 (long (Math/pow 10 6)))
+               :when (= n (sum-digit-pow n 5))]
+           n))
+  )
