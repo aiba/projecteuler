@@ -81,3 +81,9 @@
   (prime-factorization 36)
   (prime-factorization 32)
   )
+
+(defn digit-seq [n]
+  (->> n
+       str
+       (map (fn [c]
+              (Long/parseLong (str c))))))
