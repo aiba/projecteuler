@@ -24,3 +24,14 @@
   (xy-plot! (range 100)
             (map #(* % %) (range 100)))
   )
+
+(defn plot-fns! [xs fns]
+  (plot!
+   {:width 640
+    :height 480
+    :data {:values (for [x xs, [k f] fns]
+                     {:x x :y (f x) :fn (name k)})}
+    :mark {:type "line", :point true}
+    :encoding {:x {:field "x" :type "quantitative"}
+               :y {:field "y" :type "quantitative"}
+               :color {:field "fn", :type "nominal"}}}))
