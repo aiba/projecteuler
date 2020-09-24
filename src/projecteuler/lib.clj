@@ -106,3 +106,20 @@
             (count (digit-seq-3 n))))
 
   )
+
+(defn fix [f] (fn g [& args] (apply f g args)))
+
+(defmacro memo-fn [fname args & body]
+  `(fix
+    (memoize
+     (fn [~fname ~@args]
+       (do ~@body)))))
+
+(comment
+  (time
+   (let [fibo (memo-fn fibo [n]
+                       (if (< n 2)
+                         n
+                         (+ (fibo (dec n)) (fibo (- n 2)))))]
+     (fibo 40)))
+  )
