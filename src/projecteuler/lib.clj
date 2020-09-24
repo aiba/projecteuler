@@ -1,5 +1,6 @@
 (ns projecteuler.lib
-  (:require [clojure.math.combinatorics :as combo])
+  (:require [clojure.math.combinatorics :as combo]
+            [taoensso.encore :as enc])
   (:import [java.util ArrayList List]))
 
 (set! *warn-on-reflection* true)
@@ -83,7 +84,25 @@
   )
 
 (defn digit-seq [n]
-  (->> n
-       str
-       (map (fn [c]
-              (Long/parseLong (str c))))))
+  (persistent!
+   (reduce (fn [ret c]
+             (conj! ret (Character/digit ^char c 10)))
+           (transient [])
+           (str n))))
+
+(comment
+
+  (digit-seq 523423)
+
+  (for [n (range 0 1e4)
+        :when (not= (digit-seq n)
+                 (digit-seq-3 n))]
+    n)
+
+  (let [n 987654321]
+    (enc/qb [4 1e5]
+            (count (digit-seq n))
+            (count (digit-seq-2 n))
+            (count (digit-seq-3 n))))
+
+  )
