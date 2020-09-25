@@ -5,6 +5,30 @@
 
 (set! *warn-on-reflection* true)
 
+;; memo-fn —————————————————————————————————————————————————————————————————————————
+
+(defn fix [f] (fn g [& args] (apply f g args)))
+
+(defmacro fn-memo [fname args & body]
+  `(fix
+    (memoize
+     (fn [~fname ~@args]
+       (do ~@body)))))
+
+(comment
+  (time
+   (let [fibo (fn-memo fibo [n]
+                (if (< n 2)
+                  n
+                  (+ (fibo (dec n)) (fibo (- n 2)))))]
+     (fibo 40)))
+  )
+
+(defmacro defn-memo [fname & ftail]
+  `(def ~fname (fn-memo ~fname ~@ftail)))
+
+;; —————————————————————————————————————————————————————————————————————————————————
+
 (def init-primes [2 3])
 (def primes* (ArrayList. ^List init-primes))
 
@@ -26,19 +50,16 @@
   (time (last (take 10000 all-primes)))
   )
 
-(declare prime-factors)
-(def prime-factors
-  (memoize
-   (fn [n]
-     (let [max-p (int (Math/sqrt n))
-           p (loop [[p & ps] all-primes]
-               (when (<= p max-p)
-                 (if (zero? (mod n p))
-                   p
-                   (recur ps))))]
-       (if (nil? p)
-         (list n)
-         (cons p (prime-factors (/ n p))))))))
+(defn-memo prime-factors [n]
+  (let [max-p (int (Math/sqrt n))
+        p (loop [[p & ps] all-primes]
+            (when (<= p max-p)
+              (if (zero? (mod n p))
+                p
+                (recur ps))))]
+    (if (nil? p)
+      (list n)
+      (cons p (prime-factors (/ n p))))))
 
 (comment
   (prime-factors 10)
@@ -46,13 +67,12 @@
   (combo/subsets (prime-factors 220))
   )
 
-(def divisors
-  (memoize (fn [n]
-             (->> n
-                  prime-factors
-                  combo/subsets
-                  (map #(reduce * 1 %))
-                  (sort)))))
+(defn-memo divisors [n]
+  (->> n
+       prime-factors
+       combo/subsets
+       (map #(reduce * 1 %))
+       (sort)))
 
 (defn proper-divisors [n]
   (remove #{n} (divisors n)))
@@ -105,21 +125,4 @@
             (count (digit-seq-2 n))
             (count (digit-seq-3 n))))
 
-  )
-
-(defn fix [f] (fn g [& args] (apply f g args)))
-
-(defmacro memo-fn [fname args & body]
-  `(fix
-    (memoize
-     (fn [~fname ~@args]
-       (do ~@body)))))
-
-(comment
-  (time
-   (let [fibo (memo-fn fibo [n]
-                       (if (< n 2)
-                         n
-                         (+ (fibo (dec n)) (fibo (- n 2)))))]
-     (fibo 40)))
   )
