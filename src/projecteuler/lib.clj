@@ -99,7 +99,7 @@
   (frequencies (prime-factors n)))
 
 (comment
-  (prime-factorization 36)
+  (prime? 409)
   (prime-factorization 32)
   )
 
