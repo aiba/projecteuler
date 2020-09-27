@@ -50,6 +50,16 @@
   (time (last (take 10000 all-primes)))
   )
 
+(defn sieve-primes [m]
+  (let [a (long-array (range m))]
+    (aset a 0 -1)
+    (aset a 1 -1)
+    (doseq [i (range m)
+            :when (pos? (aget a i))
+            j (range (* i 2) m i)]
+      (aset a j -1))
+    (filter pos? a)))
+
 (defn-memo prime-factors [n]
   (let [max-p (int (Math/sqrt n))
         p (loop [[p & ps] all-primes]
@@ -107,7 +117,7 @@
   (loop [r (transient [])
          n n]
     (if (< n 10)
-      (rseq (persistent! (conj! r n)))
+      (persistent! (conj! r n))
       (recur (conj! r (mod n 10))
              (quot n 10)))))
 
