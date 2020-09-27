@@ -104,11 +104,12 @@
   )
 
 (defn digit-seq [n]
-  (persistent!
-   (reduce (fn [ret c]
-             (conj! ret (Character/digit ^char c 10)))
-           (transient [])
-           (str n))))
+  (loop [r (transient [])
+         n n]
+    (if (< n 10)
+      (rseq (persistent! (conj! r n)))
+      (recur (conj! r (mod n 10))
+             (quot n 10)))))
 
 (comment
 
@@ -122,7 +123,9 @@
   (let [n 987654321]
     (enc/qb [4 1e5]
             (count (digit-seq n))
-            (count (digit-seq-2 n))
-            (count (digit-seq-3 n))))
+            (count (rev-digit-seq n))))
 
   )
+
+(defn count-digits [n]
+  (inc (long (Math/floor (Math/log10 n)))))
