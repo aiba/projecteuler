@@ -137,16 +137,24 @@
 
   )
 
+(defn floor ^long [x]
+  (long (Math/floor x)))
+
+(defn ceil ^long [x]
+  (long (Math/ceil x)))
+
 (defn count-digits [n]
-  (inc (long (Math/floor (Math/log10 n)))))
+  (inc (floor (Math/log10 n))))
 
 ;; takes digits in smallest->largest endian
 (defn digits->num [digits]
   (loop [n 0
          a 1
-         [d & digits] digits]
+         [^long d & digits] digits]
     (if d
-      (recur (+ n (* d a)) (* a 10) digits)
+      (recur (+ n (* d a))
+             (* a 10)
+             digits)
       n)))
 
 (comment
