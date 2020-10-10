@@ -139,3 +139,18 @@
 
 (defn count-digits [n]
   (inc (long (Math/floor (Math/log10 n)))))
+
+;; takes digits in smallest->largest endian
+(defn digits->num [digits]
+  (loop [n 0
+         a 1
+         [d & digits] digits]
+    (if d
+      (recur (+ n (* d a)) (* a 10) digits)
+      n)))
+
+(comment
+  (-> 21 digit-seq digits->num)
+  (-> 4 digit-seq digits->num)
+  (-> 9823892 digit-seq digits->num)
+  )
