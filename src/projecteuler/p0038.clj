@@ -19,19 +19,18 @@
      [(l/digits->num p) a b])))
 
 (defn max-pandigital [max-digits]
-  (loop [m 0
-         a 1]
+  (loop [a 1
+         m 0]
     (let [d (l/count-digits a)
           max-b (l/floor (/ 9 d))]
       (if (< max-b 2)
         m
-        (apply max (for [b (range 2 (inc max-b))
-                         :let [p (digit-product a b)]
-                         :when (and (= 9 (count p))
-                                    (= digits (set p)))]
-                     (l/digits->num p))))))
-
-  )
+        (recur (inc a)
+               (apply max m (for [b (range 2 (inc max-b))
+                                  :let [p (digit-product a b)]
+                                  :when (and (= 9 (count p))
+                                             (= digits (set p)))]
+                              (l/digits->num p))))))))
 
 (comment
   (doall
@@ -47,4 +46,9 @@
   (time
    (->> (pandigitals 1e8)
         (sort-by first >)))
+  )
+
+(comment
+  (time
+   (max-pandigital 4))
   )
