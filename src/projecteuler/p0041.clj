@@ -10,5 +10,5 @@
        (take 3)))
 
 (comment
-  (combo/permutations (reverse (range 1 (inc n))))
+  (n-digit-pandigital-prime 3)
   )
