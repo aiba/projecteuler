@@ -7,7 +7,9 @@
        reverse
        combo/permutations
        (map reverse)
-       (map l/digits->num)))
+       (map l/digits->num)
+       (filter l/prime?)
+       first))
 
 (comment
   (largest-n-digit-pandigital-prime 4)
