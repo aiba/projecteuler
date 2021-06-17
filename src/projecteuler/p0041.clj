@@ -6,5 +6,5 @@
   )
 
 (comment
-  (combo/permutations (range 10))
+  (combo/permutations (range 3))
   )
