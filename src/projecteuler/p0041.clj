@@ -6,13 +6,8 @@
   (->> (range 1 (inc n))
        reverse
        combo/permutations
-       (map digits->num)
-       (filter (fn [n]
-                 (prime? )
-                 ))
-       )
-
-  )
+       (map l/digits->num)
+       (take 3)))
 
 (comment
   (combo/permutations (reverse (range 1 (inc n))))
