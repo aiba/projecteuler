@@ -10,5 +10,5 @@
        (map l/digits->num)))
 
 (comment
-  (n-digit-pandigital-prime 4)
+  (largest-n-digit-pandigital-prime 4)
   )
