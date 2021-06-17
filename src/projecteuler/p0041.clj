@@ -4,7 +4,7 @@
 
 (defn n-digit-pandigital-prime [n]
   (->> (range 1 (inc n))
-       reverse
+       ;;reverse
        combo/permutations
        (map l/digits->num)
        (take 3)))
