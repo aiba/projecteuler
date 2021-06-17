@@ -2,9 +2,17 @@
   (:require [clojure.math.combinatorics :as combo]))
 
 (defn n-digit-pandigital-prime [n]
+  (->> (range 1 (inc n))
+       reverse
+       combo/permutations
+       (map )
+       (filter (fn [n]
+                 (prime? )
+                 ))
+       )
 
   )
 
 (comment
-  (combo/permutations (range 3))
+  (combo/permutations (reverse (range 1 (inc n))))
   )
