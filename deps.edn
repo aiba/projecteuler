@@ -1,12 +1,12 @@
 {:paths ["src"]
  :deps  {cider/cider-nrepl              {:mvn/version "0.26.0"}
          clj-http                       {:mvn/version "3.12.3"}
-         com.taoensso/encore            {:mvn/version "3.7.0"}
-         com.taoensso/nippy             {:mvn/version "3.0.0"}
+         ;;com.taoensso/encore            {:mvn/version "3.7.0"}
+         com.taoensso/nippy             {:mvn/version "3.1.1"}
          criterium                      {:mvn/version "0.4.6"}
-         org.clojure/clojure            {:mvn/version "1.10.2"}
+         org.clojure/clojure            {:mvn/version "1.10.3"}
          org.clojure/math.combinatorics {:mvn/version "0.1.6"}
-         org.clojure/tools.namespace    {:mvn/version "1.0.0"}
+         org.clojure/tools.namespace    {:mvn/version "1.1.0"}
          refactor-nrepl                 {:mvn/version "2.5.1"}}
  :aliases
  {:dev
