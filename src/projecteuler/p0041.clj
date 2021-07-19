@@ -1,5 +1,6 @@
 (ns projecteuler.p0041
   (:require [clojure.math.combinatorics :as combo]
+            [clj-http.client :as http]
             [criterium.core :as c]
             [projecteuler.lib :as l]))
 
