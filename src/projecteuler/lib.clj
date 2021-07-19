@@ -52,7 +52,7 @@
   )
 
 (defn sieve-primes [m]
-  (let [a (long-array (range (inc m)))]
+  (let [a (long-array (range m))]
     (aset a 0 -1)
     (aset a 1 -1)
     (doseq [i (range m)

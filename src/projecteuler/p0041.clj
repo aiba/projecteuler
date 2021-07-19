@@ -6,7 +6,7 @@
   (time
    (def primes (l/sieve-primes 987654321)))
 
-  (l/sieve-primes 7)
+  (l/sieve-primes 8)
 
   (count primes)
   )
