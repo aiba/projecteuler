@@ -23,6 +23,12 @@
 
 (comment
 
-  (take 3 (combo/permutations (range 10)))
+  (take 3 (combo/permutations (reverse (range 1 10))))
+
+  (->> (combo/permutations (reverse (range 1 10)))
+       (map reverse)
+       (map l/digits->num)
+       (filter prime?)
+       (first))
 
   )
