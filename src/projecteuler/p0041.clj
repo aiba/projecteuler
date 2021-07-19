@@ -24,7 +24,7 @@
 
 (comment
 
-  (combo/permutations (reverse (range 1 4)))
+  (time ())
 
   (->> (combo/permutations (reverse (range 1 8)))
        (map reverse)
