@@ -24,6 +24,8 @@
 
 (comment
 
+  (combo/permutations (reverse (range 1 4)))
+
   (->> (combo/permutations (reverse (range 1 8)))
        (map reverse)
        (map l/digits->num)
