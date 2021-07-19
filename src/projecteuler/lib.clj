@@ -46,6 +46,7 @@
 
 (comment
   (time (last (take 10 all-primes)))
+  (time (last (take 100 all-primes)))
   (time (last (take 1000 all-primes)))
   (time (last (take 10000 all-primes)))
   )
