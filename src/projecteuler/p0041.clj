@@ -24,12 +24,14 @@
 
 (comment
 
-  (time ())
+  (count @prime-divisors)
 
   (->> (combo/permutations (reverse (range 1 8)))
        (map reverse)
        (map l/digits->num)
        (filter prime?)
        (first))
+
+
 
   )
