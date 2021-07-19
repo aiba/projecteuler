@@ -3,10 +3,15 @@
 
 ;; can we sieve primes up to largest potential pandigital 987654321
 (comment
-  (time
-   (def primes (l/sieve-primes 987654321)))
 
-  (l/sieve-primes 8)
+  (time
+   (def primes (l/sieve-primes (inc 987654321))))
 
   (count primes)
+
+  (float
+   (/ (* 987654321 4)
+      (* 1024 1024 1024)
+      ))
+
   )
