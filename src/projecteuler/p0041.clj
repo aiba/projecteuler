@@ -19,45 +19,10 @@
   (count @prime-divisors)
   (last @prime-divisors)
   (peek @prime-divisors)
-
-
-
-  (prime? 27)
-  (prime? 7)
-
-  (mod 27 3)
-  (let [n 27]
-    (contains? @prime-divisors n))
-
-  (take 10 @prime-divisors)
-  (contains? @prime-divisors 27)
-
-  (c/quick-bench (peek [1 2 3]))
-
-  (let [a (into (sorted-set) [1 2 3])]
-    (c/quick-bench (last a)))
-
-  (for [n (combo/permutations [3 2 1])]
-
-    )
-
-
   )
 
-()
-;; can we sieve primes up to largest potential pandigital 987654321
 (comment
 
-  (time
-   (def primes (l/sieve-primes (long (inc (Math/floor (Math/sqrt 987654321)))))))
-
-  (count primes)
-
-  (float
-   (/ (* 987654321 4)
-      (* 1024 1024 1024)
-      ))
-
-  (combo/permutations (range 10))
+  (take 3 (combo/permutations (range 10)))
 
   )
