@@ -4,13 +4,14 @@
             [projecteuler.lib :as l]))
 
 (def prime-divisors
-  (delay (set (l/sieve-primes (long (inc (Math/sqrt 987654321)))))))
+  (delay (into (sorted-set)
+               (l/sieve-primes (long (inc (Math/sqrt 987654321)))))))
 
 (def max-prime-divisor
   (delay (apply max @prime-divisors)))
 
 (defn prime? [n]
-  (if (<= n (peek @prime-divisors))
+  (if (<= n @max-prime-divisor)
     (contains? @prime-divisors n)
     (not (some #(zero? (mod n %)) @prime-divisors))))
 
